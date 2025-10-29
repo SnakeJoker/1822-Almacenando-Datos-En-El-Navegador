@@ -1,0 +1,33 @@
+[
+  {
+    "sku": "SKU-001",
+    "name": "Baterías de Ion-Litio",
+    "unit": "kWh",
+    "balance": 120.5,
+    "decimals": 1,
+    "maxWithdrawal": 30
+  },
+  {
+    "sku": "SKU-002",
+    "name": "Sensores Industriales",
+    "unit": "unidades",
+    "balance": 230,
+    "decimals": 0,
+    "maxWithdrawal": 45
+  },
+  {
+    "sku": "SKU-003",
+    "name": "Microcontroladores ARM",
+    "unit": "lotes",
+    "balance": 86.75,
+    "decimals": 2,
+    "maxWithdrawal": 40
+  },
+  {
+    "sku": "SKU-004",
+    "name": "Kits de Cableado",
+    "unit": "paquetes",
+    "balance": 150,
+    "decimals": 0
+  }
+]

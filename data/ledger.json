@@ -1,0 +1,29 @@
+[
+  {
+    "id": "mvt-001",
+    "sku": "SKU-001",
+    "type": "withdraw",
+    "amount": 12.5,
+    "balanceAfter": 120.5,
+    "timestamp": "2024-01-17T10:15:00.000Z",
+    "note": "Retiro inicial para proyecto Alfa"
+  },
+  {
+    "id": "mvt-002",
+    "sku": "SKU-003",
+    "type": "deposit",
+    "amount": 15.25,
+    "balanceAfter": 86.75,
+    "timestamp": "2024-02-02T15:30:00.000Z",
+    "note": "Ajuste de inventario"
+  },
+  {
+    "id": "mvt-003",
+    "sku": "SKU-002",
+    "type": "withdraw",
+    "amount": 20,
+    "balanceAfter": 230,
+    "timestamp": "2024-03-10T08:45:00.000Z",
+    "note": "Salida para mantenimiento"
+  }
+]
