@@ -1,45 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TODO App</title>
-    <link rel="icon" type="image/png" href="./assets/rocket.svg" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Dosis&family=Open+Sans&family=Parisienne&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <main>
-      <div class="mainCard">
-        <div class="title"><img src="./assets/rocket.svg" /></div>
-        <div>
-          <form action="">
-            <input
-              type="text"
-              name="task"
-              placeholder="Nombre de la tarea"
-              class="inputForm"
-              autocomplete="off"
-              data-form-input
-            />
-            <button type="submit" class="btnCreate" data-form-btn>
-              Agregar <i class="fas fa-plus-circle"></i>
-            </button>
-          </form>
-        </div>
-        <ul class="cardsList" data-list>
-        </ul>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventario Tokenizado</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div id="app" class="app-container">
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-icon">⛓️</span>
+        <span class="brand-name">Inventario Tokenizado</span>
       </div>
+      <nav class="main-nav" data-view="protected">
+        <button class="nav-btn" data-target="dashboard">Dashboard</button>
+        <button class="nav-btn" data-target="inventory">Inventario</button>
+        <button class="nav-btn" data-target="ledger">Movimientos</button>
+      </nav>
+      <div class="session-info" data-view="protected">
+        <span id="sessionUser"></span>
+        <button id="logoutBtn" class="logout-btn">Cerrar sesión</button>
+      </div>
+    </header>
+
+    <main class="view-wrapper">
+      <section id="loginView" class="view active">
+        <form id="loginForm" class="card">
+          <h1>Ingreso</h1>
+          <p class="subtitle">Accede con tus credenciales administrativas.</p>
+          <label>Usuario
+            <input type="text" name="username" autocomplete="username" required>
+          </label>
+          <label>Contraseña
+            <input type="password" name="password" autocomplete="current-password" required>
+          </label>
+          <button type="submit" class="primary-btn">Iniciar sesión</button>
+        </form>
+      </section>
+
+      <section id="dashboardView" class="view" data-view="protected">
+        <div class="grid kpi-grid">
+          <article class="card kpi">
+            <h2>Saldo total</h2>
+            <p id="kpiTotalBalance" class="kpi-value">--</p>
+            <span class="kpi-subtitle">Tokens agregados de todos los SKUs</span>
+          </article>
+          <article class="card kpi">
+            <h2>SKUs activos</h2>
+            <p id="kpiActiveSkus" class="kpi-value">--</p>
+            <span class="kpi-subtitle">Activos tokenizados disponibles</span>
+          </article>
+          <article class="card kpi">
+            <h2>Último movimiento</h2>
+            <p id="kpiLastMovement" class="kpi-value">--</p>
+            <span class="kpi-subtitle">Fecha y tipo del movimiento más reciente</span>
+          </article>
+        </div>
+        <section class="card recent-movements">
+          <header>
+            <h2>Movimientos recientes</h2>
+          </header>
+          <ul id="recentMovements"></ul>
+        </section>
+      </section>
+
+      <section id="inventoryView" class="view" data-view="protected">
+        <div class="card inventory-controls">
+          <div class="control-group">
+            <label for="inventorySearch">Buscar SKU o nombre</label>
+            <input type="search" id="inventorySearch" placeholder="Ej. SKU-001">
+          </div>
+        </div>
+        <section class="card">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>SKU</th>
+                <th>Activo</th>
+                <th>Saldo</th>
+                <th>Límites</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="inventoryBody"></tbody>
+          </table>
+          <div class="pagination" id="inventoryPagination"></div>
+        </section>
+      </section>
+
+      <section id="ledgerView" class="view" data-view="protected">
+        <div class="card ledger-controls">
+          <div class="control-group">
+            <label for="ledgerSkuFilter">Filtrar por SKU</label>
+            <select id="ledgerSkuFilter"></select>
+          </div>
+        </div>
+        <section class="card">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>SKU</th>
+                <th>Tipo</th>
+                <th>Monto</th>
+                <th>Saldo restante</th>
+                <th>Notas</th>
+              </tr>
+            </thead>
+            <tbody id="ledgerBody"></tbody>
+          </table>
+          <div class="pagination" id="ledgerPagination"></div>
+        </section>
+      </section>
     </main>
-    <script type="module" src="script.js"></script>
-  </body>
+  </div>
+
+  <div id="globalSpinner" class="spinner-overlay hidden">
+    <div class="spinner-card">
+      <div class="loader"></div>
+      <p>Procesando <span id="spinnerCount">0</span> operación(es)...</p>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <div id="dialogHost"></div>
+
+  <script src="assets/app.js" type="module"></script>
+</body>
 </html>

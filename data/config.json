@@ -1,0 +1,6 @@
+{
+  "depositsEnabled": false,
+  "globalMaxWithdrawalPerSKU": 50,
+  "decimalSeparator": ".",
+  "appName": "Inventario Tokenizado"
+}
